@@ -1,0 +1,18 @@
+{% extends "signlayout.html" %}
+
+{% block title %} Sign In {% endblock %}
+
+    {% block form %}
+    <h1 class="col-main">Welcome to FSL</h1>
+    <form action="/login" method="post" id="login" class="d-flex flex-column h-75 justify-content-between">
+        <h4>Login Detail</h4>
+        <input type="text" placeholder="Enter your Mail or Username" required name="username">
+        <input id="pass" required type="password" name="password" placeholder="Enter your password" >
+        <span><input placeholder="showpass" type="checkbox" onclick="toggle_pass('pass')">Show Password</span>
+        <div>
+            <a href="/reset_pass">Forgot Password</a>
+        </div>
+        <input type="submit" class="submit bg-main text-white fw-bolder" value="Sign In"  placeholder="Sign In">
+    </form>
+    <div>Don't have an Account? <a href="/signup">Sign Up</a></div>
+    {% endblock %}

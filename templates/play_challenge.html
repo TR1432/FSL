@@ -1,0 +1,32 @@
+{% extends "applayout.html" %}
+    {% block title %} Challenge {% endblock %}
+
+    
+    {% block content %}
+    <div class="content h-100 bg-l pt-2 pb-2 pe-2 ps-2 w-100">
+        <img class="gbthing rounded-end" src="{{ url_for('static', filename='1x/360.jpg') }}" alt="" width="35" height="70">
+        <div class="gbhelp m-3 mb-7 d-flex flex-row">
+            <img class="bg-sec rounded" src="{{ url_for('static', filename='1x/challenge.png') }}"  alt="" width="35" height="35">
+            <header class="fs-1 fw-bolder align-text-top">Challenge</header>
+        </div>
+        <div class="ps-5 pe-5 w-75 h-75 ms-2">
+            <form action="/predict" method="post">
+                {% for fixture in fixtures %}
+                <div>
+                    <label class="col" for="{{fixture.id}}">{{teamnames.get(fixture.home_team_id)}}(Home)  VS (Away){{teamnames.get(fixture.away_team_id)}}</label>
+                    <select name="{{fixture.id}}" title="Prediction">
+                        <option value="home win">Home Win</option>
+                        <option value="draw">Draw</option>
+                        <option value="away win">Away win</option>
+                    </select>
+                </div>
+                {% endfor %}
+                <input type="submit" value="Submit Predictions">
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block user %}
+
+    {% endblock %}

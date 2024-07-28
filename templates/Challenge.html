@@ -1,0 +1,92 @@
+{% extends "applayout.html" %}
+    {% block title %} Challenge {% endblock %}
+
+    
+    {% block content %}
+    <div class="content h-100 bg-l pt-2 pb-2 pe-2 ps-2 w-100">
+        <img class="gbthing rounded-end" src="{{ url_for('static', filename='1x/360.jpg') }}" alt="" width="35" height="70">
+        <div class="gbhelp m-3 mb-7 d-flex flex-row">
+            <img class="bg-sec rounded" src="{{ url_for('static', filename='1x/challenge.png') }}"  alt="" width="35" height="35">
+            <header class="fs-1 fw-bolder align-text-top">Challenge</header>
+        </div>
+        <div class="ps-5 pe-5 w-75 h-75 ms-2">
+            <p>Prizes</p>
+            <p>Overall Prizez</p>
+            <p><span>1st</span> <span>-</span> <span>40000</span></p>
+            <p><span>2nd</span> <span>-</span> <span>30000</span></p>
+            <p><span>3rd</span> <span>-</span> <span>20000</span></p>
+            <p><u>SUPER CHALLENGE</u></p>
+            <div><u>#EARN MORE POINTS</u></div>
+            <p>Note:</p>
+            <ul>
+                <li>Predict who will win, draw, or lose each gameweek</li>
+                <li>Predict four (4) correct and earn 10 points</li>
+                <li>Predict three (3) correct and earn 5 points</li>
+                <li>Predict two or less and earn 0 points</li>
+            </ul>
+            <p>How to play:</p>
+            <ul>
+                <li>Deposit #1000 each gameweek to play</li>
+                <li>Access each match and predict who will WIN, DRAW or LOSE</li>
+                <li>Play every gameweek to Rack up POINTS and increase your chances</li>
+            </ul>
+            <button id="pay" type="button" >Pay for Challenge</button>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block user %}
+    <script src="https://js.paystack.co/v2/inline.js"></script>
+   <!-- <script src="https://newwebpay.qa.interswitchng.com/inline-checkout.js"></script> -->
+   <script>
+    const payment = document.getElementById('pay');
+    payment.addEventListener("click", payWithPaystack, false);
+
+    function payWithPaystack(e) {
+        e.preventDefault();
+
+        let handler = PaystackPop.setup({
+            key: 'pk_test_9bdac3f85529d1044143efabbfb07d09641d5fd6',
+            email: {{user.email}},
+            amount: 100000,
+            currency: 'NGN',
+            ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+            onClose: function(){
+                alert('Window closed.');
+            },
+            callback: function(response){
+                let message = 'Payment complete. Reference: ' + response.reference;
+                window.location.href = "/enterchallenge";
+                alert(message);
+            }
+        });
+        handler.openIframe();
+    }
+       /* const payment = document.getElementById('pay');
+        payment.addEventListener("click", payWithInterswitch);
+        function payWithInterswitch(e){
+            e.preventDefault();
+            
+            let handler = {
+                merchant_code: "MX143633",          
+                pay_item_id: "101007",
+                txn_ref:''+Math.floor((Math.random() * 1000000000) + 1),
+                site_redirect_url: "/enterchallenge",
+                amount: 100000, 
+                currency: 566,
+                onComplete: paymentCallback,
+                mode: 'TEST'
+            };
+            window.webpayCheckout(handler);
+        }
+        function paymentCallback(response) {
+            console.log(response);
+            window.location.href = "/enterchallenge";
+        }*/
+        </script>
+        {% if msg %}
+            <script>
+            alert("{{msg}}");
+            </script>
+        {% endif %}
+        {% endblock %}

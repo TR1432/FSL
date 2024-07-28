@@ -1,0 +1,21 @@
+/* colors
+    #2e725f
+*/
+
+
+body{
+    background-image: url("../1x/custadium.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-filter{
+    background-color: rgba(46, 114, 95, .8);
+}
+
+.bg-main{
+    background-color: #2e725f;
+}
+
+.col-main{
+    color:#2e725f;
+}

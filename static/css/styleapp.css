@@ -1,0 +1,134 @@
+.info{
+    padding: .7%;
+    
+}
+/* color scheme:
+ #36023e
+ #27ca23
+ #bae8c1
+ #00fe8c
+*/
+.bg-prim{
+    background-color: #36023e;
+}
+
+.bg-lgr{
+    background-color: #00fe8c ;
+}
+
+a{
+    color: #36023e;
+}
+
+body{
+    color: #36023e;
+}
+
+.info header{
+    margin-bottom: 20%;
+}
+
+.bg-sec{
+    background-color: #ced4da;
+}
+
+.bg-l{
+    background-color: #e9ecef;
+}
+
+.bg-gray{
+    background-color: #adb5bd!important;
+}
+
+.border-l{
+    border-color: #6c757d!important;
+}
+
+.w-40{
+    width: 40%!important;
+}
+.w-25{
+    width: 25%!important;
+}
+
+.w-80{
+    width: 78%!important;
+}
+.w-15{
+    width: 15%!important;
+}
+.w-90{
+    width: 90%!important;
+}
+.w-98{
+    width: 93%!important;
+}
+.w-65{
+    width: 65%!important;
+}
+
+
+.h-60{
+    height: 60%!important;
+}
+
+.h-80{
+    height: 80%!important;
+}
+
+.h-95{
+    height: 95%!important;
+}
+
+.ms-7 {
+    margin-left: 4rem !important;
+  }
+
+.mb-7 {
+    margin-bottom: 4rem !important;
+}
+
+.ps-6{
+    padding-left: 4rem!important;
+}
+
+.pe-6{
+    padding-right: 4rem!important;
+}
+
+.gbhelp{
+    position: relative;
+    z-index: 2;
+}
+
+.gbthing{
+    position: absolute;
+    z-index: 1;
+}
+
+.navhi{
+    background-image: url("../1x/360.png");
+    background-size: cover;
+}
+
+.pitch{
+    background-image: url("../1x/pitch.png");
+    background-size: cover;
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+}
+
+.grn-grad{
+    background: linear-gradient(180deg, rgba(39,202,35,1) 23%, rgba(186,232,193,1) 45%);
+}
+
+.bg-green{
+    background-color: #27ca23;
+}
+
+.selected{
+    border: 3px solid #36023e;
+    transition: 1s;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    transform: scale(1.2);
+}

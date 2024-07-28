@@ -1,0 +1,124 @@
+{% extends "applayout.html" %}
+{% block title %} Transfers {% endblock %}
+
+{% block content %}
+<div class="content h-100 bg-l pt-2 pb-2 pe-2 ps-2 w-100">
+    <img class="gbthing rounded-end" src="{{ url_for('static', filename='1x/360.jpg') }}" alt="" width="35" height="70">
+    <div class="m-3 d-flex flex-row">
+        <img class="gbhelp bg-sec rounded" src="{{ url_for('static', filename='1x/transfer.png') }}" alt="" width="35" height="35">
+        <header>Transfers</header>
+    </div>
+    <div class="d-flex flex-row justify-content-around w-100 h-80">
+        <div class="grn-grad rounded-top d-flex flex-column w-65 h-100">
+            <table class="align-self-center w-50 table">
+                <thead>
+                    <th scope="col">Budget Remaining</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="budget-remaining">{{team_budget}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pitch align-self-center d-flex flex-column justify-content-around text-center w-100 h-100">
+                <div class="Goalkeeper d-flex flex-row justify-content-around align-self-center w-50 mt-5">
+                    {% for player in team %}
+                        {% if player.position == "Goalkeeper" %}
+                            <div class="player" data-id="{{ player.id }}" data-price="{{ player.price }}" data-team="{{ teamnames.get(player.SwepLeagueTeam_id) }}" data-position ="{{player.position}}" >
+                                <img src="{{ url_for('static', filename='1x/' + teamnames.get(player.SwepLeagueTeam_id) + 'shirt.png') }}" alt="" width="50" height="60">
+                                <div>{{ player.name }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="Defender d-flex flex-row justify-content-around align-self-center w-75">
+                    {% for player in team %}
+                        {% if player.position == "Defender" %}
+                            <div class="player" data-id="{{ player.id }}" data-price="{{ player.price }}" data-team="{{ teamnames.get(player.SwepLeagueTeam_id) }}" data-position ="{{player.position}}">
+                                <img src="{{ url_for('static', filename='1x/' + teamnames.get(player.SwepLeagueTeam_id) + 'shirt.png') }}" alt="" width="50" height="60">
+                                <div>{{ player.name }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="Midfielder d-flex flex-row justify-content-around align-self-center w-75">
+                    {% for player in team %}
+                        {% if player.position == "Midfielder" %}
+                            <div class="player" data-id="{{ player.id }}" data-price="{{ player.price }}" data-team="{{ teamnames.get(player.SwepLeagueTeam_id) }}" data-position ="{{player.position}}">
+                                <img src="{{ url_for('static', filename='1x/' + teamnames.get(player.SwepLeagueTeam_id) + 'shirt.png') }}" alt="" width="50" height="60">
+                                <div>{{ player.name }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="Attacker d-flex flex-row justify-content-around align-self-center w-50">
+                    {% for player in team %}
+                        {% if player.position == "Attacker" %}
+                            <div class="player" data-id="{{ player.id }}" data-price="{{ player.price }}" data-team="{{ teamnames.get(player.SwepLeagueTeam_id) }}" data-position ="{{player.position}}">
+                                <img src="{{ url_for('static', filename='1x/' + teamnames.get(player.SwepLeagueTeam_id) + 'shirt.png') }}" alt="" width="50" height="60">
+                                <div>{{ player.name }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <button type="submit" id="submit" class="w-25 btn btn-outline-secondary align-self-center m-1 rounded">Make transfer</button>
+        </div>
+        <div class="grn-grad w-25 h-100 overflow-auto">
+            <div class="d-flex flex-row justify-content-between">
+                <select title="filter" class="btn bg-sec dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <option class="dropdown-item" selected disabled>Position</option>
+                    <option class="dropdown-item" >All</option>
+                    <option class="dropdown-item" >Attacker</option>
+                    <option class="dropdown-item" >Midfielder</option>
+                    <option class="dropdown-item" >Defender</option>
+                    <option class="dropdown-item" >Goalkeeper</option>
+                </select>
+                <select title="filter" class="btn bg-sec dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <option class="dropdown-item" selected disabled>Team</option>
+                    <option class="dropdown-item" >All</option>
+                    <option class="dropdown-item" >Comp Engr</option>
+                    <option class="dropdown-item" >ICE</option>
+                    <option class="dropdown-item" >Bld Tech</option>
+                    <option class="dropdown-item" >EEE</option>
+                    <option class="dropdown-item" >Mech</option>
+                    <option class="dropdown-item" >PET</option>
+                    <option class="dropdown-item" >Chem</option>
+                    <option class="dropdown-item" >Civil</option>
+                </select>
+                <div class="dropdown">
+                    <button class="btn bg-sec p-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Price
+                    </button>
+                    <div class="dropdown-menu">
+                        <input type="number" min="4" max="10" placeholder=" price">
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <th>Players</th>
+                    <th>Team</th>
+                    <th>Price</th>
+                    <th>Total pts</th>
+                </thead>
+                <tbody class="text-white">
+                    {% for player in players %}
+                        <tr class="bg-prim-low available-player" data-team="{{ teamnames.get(player.SwepLeagueTeam_id) }}" data-position="{{ player.position }}" data-id="{{ player.id }}" data-price="{{ player.price }}">
+                            <td>
+                                <img src="{{ url_for('static', filename='1x/' + teamnames.get(player.SwepLeagueTeam_id) + 'shirt.png') }}" alt="" width="30" height="30">
+                                {{ player.name }}
+                            </td>
+                            <td>{{ teamnames.get(player.SwepLeagueTeam_id)}}</td>
+                            <td>${{ player.price }}m</td>
+                            <td>{{ player.total_points }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script src="{{ url_for('static', filename='js/transfer.js') }}"></script>
+{% endblock %}

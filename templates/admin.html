@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+    <h1>FSL Admin Page</h1>
+    <a href="/create_fixt">Create fixture</a>
+    <a href="/update_match">Update Matches</a>
+    <a href="/upload_points">Upload player points</a>
+    <a href="/set_new_gameweek">Set New Gameweek</a>
+
+    {% block form %}
+    
+    {% endblock %}
+
+    <script>
+        {% if msg %}
+        alert('{{msg}}');
+        {% endif %}
+    </script>
+</body>
+</html>

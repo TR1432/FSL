@@ -1,0 +1,8 @@
+{% for player in players %}
+    <tr class="bg-sec rounded players">
+        <td>{{player.name}}</td>
+        <td>{{teamnames.get(player.SwepLeagueTeam_id)}}</td>
+        <td>{{player.position}}</td>
+        <td><span>{{player.price}}</span><img class="bg-green ms-2 rounded p-2" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="35" height="35"></td>
+    </tr>
+{% endfor %}

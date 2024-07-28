@@ -1,0 +1,70 @@
+{% extends "applayout.html" %}
+    {% block title %} Fixtures {% endblock %}
+
+    {% block info %}
+    <div class="info h-100 w-15 text-center bg-l overflow-auto" >
+        <header>Upcoming</header>
+        {% for fixture in fixtures %}
+        <div class="d-flex flex-column h-auto"> 
+                {% if fixture.game_week < matchday %}
+                {% else %}
+                    <div class="rounded bg-sec mb-2 ps-3 pe-3 pt-2 pb-2"><span>{{fixture.home_team.team_name}}</span> VS <span>{{fixture.away_team.team_name}}</span></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class="content h-100 w-50 bg-l pt-2 pb-2 pe-2 overflow-auto">
+        <img class="gbthing rounded-end" src="{{ url_for('static', filename='1x/360.jpg') }}" alt="" width="35" height="70">
+        <div class="gbhelp m-3 mb-7 d-flex flex-row">
+            <img class="bg-sec rounded" src="{{ url_for('static', filename='1x/fslprim.png') }}"  alt="" width="35" height="35">
+            <header class="fs-1 fw-bolder align-text-top">Fixtures</header>
+        </div>
+        <div class="text-center h-75 ms-2">
+            <div id="subhead" class="d-flex justify-content-between mb-3">  
+                <span class="rounded-pill bg-sec ps-1 pe-1">&lt; Previous</span> 
+                <span>Match Day {{matchday}}</span>   
+                <span class="rounded-pill bg-sec pe-1 ps-4">Next &gt;</span>   
+            </div>
+            <div class="stats-contain d-flex flex-column h-100 flex-nowrap overflow-auto align-items-center">  
+                {% if matches %}
+                {% for match in matches %}
+                <div class="d-flex flex-row justify-content-between rounded bg-sec w-40 mb-2 fs-5 p-1 match" data-home="{{teamnames.get(match.home_team_id)}}" data-away="{{teamnames.get(match.away_team_id)}}">
+                    <span><span class="home">{{teamnames.get(match.home_team_id)}}</span><img src="{{ url_for('static', filename='1x/' + teamnames.get(match.home_team_id) + '.png') }}" alt="" width="35" height="35"></span>
+                    <span>{{match.home_score}}</span><span>{{match.away_score}}</span>
+                    <span><img src="{{ url_for('static', filename='1x/' + teamnames.get(match.away_team_id) + '.png') }}" alt="" width="35" height="35"><span class="away">{{teamnames.get(match.away_team_id)}}</span></span>
+                </div> 
+                        {% endfor %}
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block user %}
+    <div class="user h-100 bg-l  w-auto p-5">
+        <div class="d-flex flex-column justify-content-center align-items-center m-5 p-5">
+            <img class="rounded-circle bg-sec" src="{{ url_for('static', filename='1x/fslprim.png') }}" alt="" width="120" height="120">
+            <p class="fw-bolder fs-4">{{user.username}}</p>
+            <p class="fw-normal fs-6">{{user.team_name}}</p>
+            <div>
+                <img class="p-1 bg-sec rounded m-2" src="{{ url_for('static', filename='1x/Asset 1.png') }}" alt="" width="45" height="45">
+                <img class="p-1 bg-sec rounded m-2" src="{{ url_for('static', filename='1x/Asset 1.png') }}" alt="" width="45" height="45">
+            </div>
+        </div>
+    </div>
+    <script>
+        let matches = document.querySelectorAll(".match");
+        matches.forEach(element => {
+        element.addEventListener("click", async function() {
+        let home = element.dataset.home;
+        let away = element.dataset.away;
+        let response = await fetch('/match_details?home=' + home + '&away=' + away);
+        let stats = await response.text();
+        document.querySelector(".stats-contain").innerHTML = stats;
+    });
+});
+    </script>
+    {% endblock %}

@@ -1,0 +1,12 @@
+{% for player in players %}
+<div>
+    <h3>{{ player.name }} ({{ teamnames.get(player.SwepLeagueTeam_id) }})</h3>
+    {% if player.position == "Goalkeeper" %}
+    <label>Saves: <input type="number" name="saves_{{ player.id }}" min="0"></label>
+    {% endif %}
+    <label>Goals: <input type="number" name="goals_{{ player.id }}" min="0"></label>
+    <label>Assists: <input type="number" name="assists_{{ player.id }}" min="0"></label>
+    <label>Yellow Card: <input type="checkbox" name="yellowcard_{{ player.id }}"></label>
+    <label>Red Card: <input type="checkbox" name="redcard_{{ player.id }}"></label>
+</div>
+{% endfor %}

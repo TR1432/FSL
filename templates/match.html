@@ -1,0 +1,116 @@
+<div class="bg-lgr d-flex flex-row justify-content-around w-80 fs-4 fw-bolder pt-4 pb-4 rounded">
+    {{teamnames.get(match.home_team_id)}}
+    <img alt="Team logo" src="{{ url_for('static', filename='1x/' + teamnames.get(match.home_team_id) + '.png') }}" width="40" height="40">
+
+    <div class="w-25 bg-prim pt-1 pb-1 text-white d-flex flex-row justify-content-around">
+        <span class="border-end pe-4">{{ match.home_score }}</span>
+        <span class="border-start ps-4">{{ match.away_score }}</span>
+    </div>
+
+    <img alt="Team logo" src="{{ url_for('static', filename='1x/' + teamnames.get(match.away_team_id) + '.png') }}" width="40" height="40">
+    {{teamnames.get(match.away_team_id)}}
+</div>
+
+<div class="rounded border border-secondary pe-6 ps-6 bg-white">
+    Match Details
+</div>
+
+<div class="text-center w-100 border border-secondary rounded shadow-lg p-1">
+    <div class="bg-lgr fw-bolder">
+        Goals Scored
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, count in match.home_stats['goals'] %}
+                    {{ player.name }}({{ count }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, count in match.away_stats['goals'] %}
+                    {{ player.name }}({{ count }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center w-100 border border-secondary rounded shadow-lg p-1">
+    <div class="bg-lgr fw-bolder">
+        Assists
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, count in match.home_stats['assists'] %}
+                    {{ player.name }}({{ count }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, count in match.away_stats['assists'] %}
+                    {{ player.name }}({{ count }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center w-100 border border-secondary rounded shadow-lg p-1">
+    <div class="bg-lgr fw-bolder">
+        Yellow Card
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, _ in match.home_stats['yellow_cards'] %}
+                    {{ player.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, _ in match.away_stats['yellow_cards'] %}
+                    {{ player.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center w-100 border border-secondary rounded shadow-lg p-1">
+    <div class="bg-lgr fw-bolder">
+        Red Card
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, _ in match.home_stats['red_cards'] %}
+                    {{ player.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, _ in match.away_stats['red_cards'] %}
+                    {{ player.name }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center w-100 border border-secondary rounded shadow-lg p-1">
+    <div class="bg-lgr fw-bolder">
+        Saves
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, count in match.home_stats['saves'] %}
+                    {{ player.name }}({{ count }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col p-1 border-bottom border-secondary m-1">
+                {% for player, count in match.away_stats['saves'] %}
+                    {{ player.name }}({{ count }}){% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

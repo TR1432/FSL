@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap-5.0.2-dist/css/bootstrap.css" >
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container">
+          <a class="navbar-brand" href=""> 
+            <img src="stylesheets/1x/Asset 1.webp" alt="Fsl" width="30" height="24">
+          </a>
+            <div>
+                <a class="navbar-brand" href=""> 
+                    <img src="stylesheets/1x/Asset 1.webp" alt="Fsl" width="30" height="24">
+                    Fixtures
+                </a>
+                <a class="navbar-brand" href=""> 
+                    <img src="stylesheets/1x/Asset 1.webp" alt="Tables" width="30" height="24">
+                    Tables
+                </a>
+                <a class="navbar-brand" href=""> 
+                    <img src="stylesheets/1x/Asset 1.webp" alt="Leaderboard" width="30" height="24">
+                    Leaderboard
+                </a>
+            </div>
+          <a class="navbar-brand" href=""> 
+            <img src="stylesheets/1x/Asset 1.webp" alt="Points" width="30" height="24">
+            Points
+          </a>
+          <a class="navbar-brand" href=""> 
+            <img src="stylesheets/1x/Asset 1.webp" alt="My Team" width="30" height="24">
+            My Team
+          </a>
+          <div>
+                <a class="navbar-brand" href=""> 
+                    <img src="stylesheets/1x/Asset 1.webp" alt="user pic" width="30" height="24">
+                </a>
+                <a class="navbar-brand" href=""> 
+                    <img src="stylesheets/1x/Asset 1.webp" alt="settings" width="30" height="24">
+                </a>
+          </div>
+        </div>
+    </nav>
+
+    <div id="info">
+
+    </div>
+    
+    <div id="content">
+        <div>
+            <img src="..." class="rounded float-start" alt="...">
+            <header>{% block content-head %} Fixtures {% endblock %}</header>
+        </div>
+        {% block content %}
+        <div id="subhead">  <span>&lt; Previous</span> <span>Gameweek{}</span>   <span>Next &gt;</span>   </div>
+            {% for match in matches %}
+                {% if %}
+                {% else %}
+                {% endif %}
+            {% endfor %}
+        {% endblock %}
+    </div>
+
+    <div id="user">
+    
+    </div>
+    
+</body>
+</html>

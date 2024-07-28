@@ -1,0 +1,42 @@
+{% extends "signlayout.html" %}
+
+{% block title %} Sign Up {% endblock %}
+
+    {% block form %}
+    <h1 class="col-main">Welcome to FSL</h1>
+    <form action="/register" method="post" class="container">
+        <div class="row">
+            <div class="col fs-4 fw-bolder">
+                Biodata
+            </div>
+            <div class="col fs-4 fw-bolder">
+                Profile data
+            </div>
+        </div>
+        <div class="row">
+            <input required class="col m-1 p-3 h-25 bg-sec rounded border-0 border" type="text" name="username" placeholder="username*">
+            <input required class="col m-1 p-3 h-25 bg-sec rounded border-0 border" type="text" name="email" placeholder="Email*">
+        </div>
+        <div class="row">
+            <select required class="col m-1 p-3 h-25 bg-sec rounded border-0 border" title="favteam" name="favteam">
+                <option value="Supporting Team" selected disabled>Favourite Team</option>
+                <option value="Comp Engr"> CEN FC</option>
+                <option value="Civil">Civil FC</option>
+                <option value="ICE">ICE FC</option>
+                <option value="Chem">CHM FC</option>
+                <option value="EEE">EEE FC</option>
+                <option value="Mech">MECH FC</option>
+                <option value="Pet">PET FC</option>
+                <option value="Bld Tech">BTECH FC</option>
+            </select>
+            <input required class="col m-1 p-3 h-25 bg-sec rounded border-0 border" id="pass" type="password" name="password" placeholder="Password*">
+        </div>
+        <div class="row">
+            <input required class="col m-1 p-3 h-25 bg-sec rounded border-0 border" type="text" placeholder="Fsl Team Name" name="team_name" >
+            <p class="col m-1 p-3 h-25"><input placeholder="showpass" type="checkbox" onclick="toggle_pass('pass')">Show Password</p>
+        </div>
+        <div class="row">
+            <input class="bg-main border border-0 rounded m-3" type="submit" placeholder="REGISTER" value="REGISTER" id="register" class="submit">
+        </div>
+    </form>
+{% endblock %}

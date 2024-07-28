@@ -1,0 +1,80 @@
+{% extends "applayout.html" %}
+    {% block title %} Tables {% endblock %}
+
+    {% block info %}
+    <div class="info h-100 w-15 text-center bg-l overflow-auto" >
+        <header>Upcoming</header>
+        <div class="d-flex flex-column h-auto"> 
+            {% for fixture in fixtures %}
+                {% if fixture.matchday <= gameweek %}
+                {% else %}
+                    <div class="rounded bg-sec mb-2 ps-3 pe-3 pt-2 pb-2"><span>{{fixture.home_team}}</span> vs <span>{{fixture.away_team}}</span></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+    
+    {% block content %}
+    <div class="content h-100 bg-l pt-2 pb-2 overflow-auto pe-2 w-80">
+        <img class="gbthing rounded-end" src="{{ url_for('static', filename='1x/360.jpg') }}" alt="" width="35" height="70">
+        <div class="m-3 d-flex flex-row">
+            <img class="bg-sec rounded gbhelp" src="{{ url_for('static', filename='1x/table.png') }}"  alt="" width="35" height="35">
+            <header>Tables</header>
+        </div>
+        <div class="ms-2">
+            <p class="fw-bolder mt-5 ms-7 ">Table</p>
+            <div class="border border-l ms-7 mb-2 w-90">
+                <table class="table caption-top w-90 m-3">
+                    <caption>The current standing of all teams in the SWEP League</caption>
+                    <thead>
+                        <th scope="col" class="fw-normal bg-gray">Club</th>
+                        <th scope="col" class="fw-normal">Mp</th>
+                        <th scope="col" class="fw-normal">W</th>
+                        <th scope="col" class="fw-normal">D</th>
+                        <th scope="col" class="fw-normal">L</th>
+                        <th scope="col" class="fw-normal">GF</th>
+                        <th scope="col" class="fw-normal">GA</th>
+                        <th scope="col" class="fw-normal">GD</th>
+                        <th scope="col" class="">Pts</th>
+                    </thead>
+                    <tbody>
+                        {% for team in swepteams %}
+                        <tr>
+                            <td class="bg-gray ">{{team.team_name}}</td>
+                            <td>{{team.mathces_played}}</td>
+                            <td>{{team.wins}}</td>
+                            <td>{{team.draws}}</td>
+                            <td>{{team.losses}}</td>
+                            <td>{{team.goals_for}}</td>
+                            <td>{{team.goals_against}}</td>
+                            <td>{{team.goal_diff}}</td>
+                            <td>{{team.total_points}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="fw-bolder mt-5 ms-7 ">Standing</p>
+            <div class="border border-l ms-7 mb-2 w-90">
+                <table class="table caption-top w-90 m-3">
+                    <caption>The current standing of each team in the conquest of wining the Fantasy SWEP League</caption>
+                    <thead>
+                        <th scope="col" class="fw-normal bg-gray">Club</th>
+                        <th scope="col">gameweek pts</th>
+                        <th scope="col" class="">Pts</th>
+                    </thead>
+                    <tbody>
+                        {% for team in fslteams%}
+                        <tr>
+                            <td class="bg-gray ">{{team.team_name}}</td>
+                            <td>{{team.current_points}}</td>
+                            <td>{{team.total_points}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

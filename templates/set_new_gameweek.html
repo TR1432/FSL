@@ -1,0 +1,13 @@
+{% extends "admin.html" %}
+
+{% block form %}
+    <form action="/set_new_gameweek" method="post">
+        <h1>Are You sure?</h1>
+        <select name="answer" title="answer">
+            <option value="Are you sure?" selected disabled>Are you sure?</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% for player in players %}
+    <tr class="bg-prim-low available-player" data-position="{{ player.position }}" data-team="{{ teamnames.get(player.SwepLeagueTeam_id) }}" data-id="{{ player.id }}" data-price="{{ player.price }}">
+        <td>
+            <img src="{{ url_for('static', filename='1x/' + teamnames.get(player.SwepLeagueTeam_id) + 'shirt.png') }}" alt="" width="30" height="30">
+            {{ player.name }}
+        </td>
+        <td>{{ teamnames.get(player.SwepLeagueTeam_id)}}</td>
+        <td>${{ player.price }}m</td>
+        <td>{{ player.total_points }}</td>
+    </tr>
+{% endfor %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} FSL {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleapp.css') }}">
+</head>
+<body class="d-flex flex-row justify-content-between vh-100" >
+    <nav class="navbar bg-body-tertiary h-100 w-auto bg-l ps-2 pe-1">
+        <div class=" d-flex flex-column text-center h-100 " >
+            <a class=" text-decoration-none mb-5" href=""> 
+                <img  class="bg-sec rounded" src="{{ url_for('static', filename='1x/Asset 1.png') }}" alt="Fsl" width="35" height="35">
+            </a>
+            <a class=" text-decoration-none mb-2" href="/fixtures"> 
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/Asset 1.png') }}" alt="Fsl" width="35" height="35">
+                <p class="fs-6">Fixtures</p>
+            </a>
+            <a class=" text-decoration-none mb-2" href="/tables"> 
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/table.png') }}" alt="Tables" width="35" height="35">
+                <p class="fs-6">Tables</p>
+            </a>
+            <a class=" text-decoration-none mb-3" href="/transfers">    
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/transfer.png') }}" alt="Leaderboard" width="35" height="35">
+                <p class="fs-6">Transfers</p>
+            </a>
+            <a class=" text-decoration-none mb-3" href="/challenge">    
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/challenge.png') }}" alt="Leaderboard" width="35" height="35">
+                <p class="fs-6">Challenge</p>
+            </a>
+            <a class=" text-decoration-none mb-2" href="/points"> 
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/point.png') }}" alt="Points" width="35" height="35">
+                <p class="fs-6">Points</p>
+            </a>
+            <a class=" text-decoration-none mb-2" href="/myteam"> 
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/team.png') }}" alt="My Team" width="35" height="35">
+                <p class="fs-6">My Team</p>
+            </a>
+            <a class=" text-decoration-none  p-2 mt-auto" href=""> 
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/Asset 1.png') }}" alt="user pic" width="35" height="35">
+            </a>
+            <a class=" text-decoration-none mb-2" href="/logout"> 
+                <img class="p-1 bg-sec rounded" src="{{ url_for('static', filename='1x/Asset 1.png') }}" alt="settings" width="35" height="35">
+                <p class="fs-6">Logout</p>
+            </a>
+        </div>
+    </nav>
+    {% block info %}
+
+    {% endblock %}
+
+    {% block content %}
+    
+    {% endblock %}
+
+    {% block user %}
+    
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/appscript.js') }}"></script>
+</body>
+</html>

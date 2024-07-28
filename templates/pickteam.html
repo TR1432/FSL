@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Team</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleapp.css') }}">
+</head>
+<body class="p-5 vh-100">
+   <header>Pick Your Team</header>
+   <main class="d-flex flex-row justify-content-between h-95">
+        <div id="team" class="w-50 h-95 d-flex flex-column justify-content-between overflow-auto">
+            <div>
+                <p>Defenders</p>
+                <div id="Defender" class="d-flex flex-row justify-content-around">
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p>Midfielders</p>
+                <div id="Midfielder" class="d-flex flex-row justify-content-around">
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p>Attackers</p>
+                <div id="Attacker" class="d-flex flex-row justify-content-around">
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p>Goalkeepers</p>
+                <div id="Goalkeeper" class="d-flex flex-row justify-content-around">
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                    <div class="player">
+                        <div class="p-5 bg-sec rounded">
+                            <img class="" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="20" height="20">
+                        </div> 
+                        <div class="text-center" data-teamname="">name</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-40 h-95 overflow-auto">
+            <p>Search Players</p>
+            <div class="d-flex flex-row">
+                <div class="dropdown">
+                    <button class="btn bg-sec p-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Price
+                    </button>
+                    <div class="dropdown-menu">
+                        <input type="number" min="4" max="10" placeholder=" price">
+                    </div>
+                </div>
+                <select title="filter" class="btn ms-4 bg-sec p-3" data-bs-toggle="dropdown" aria-expanded="false">
+                    <option  selected disabled>Postions</option>
+                    <option >All</option>
+                    <option >Attacker</option>
+                    <option >Midfielder</option>
+                    <option >Defender</option>
+                    <option >Goalkeeper</option>
+                </select>
+            </div>
+            <input class="m-2 w-50" type="search" placeholder="Search player name">
+            <table class="table">
+                <thead>
+                    <th scope="col">Players</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Price</th>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                    <tr class="bg-sec rounded players">
+                        <td>{{player.name}}</td>
+                        <td>{{teamnames.get(player.SwepLeagueTeam_id)}}</td>
+                        <td>{{player.position}}</td>
+                        <td><span>{{player.price}}</span><img class="bg-green ms-2 rounded p-2" src="{{ url_for('static', filename='1x/add.png') }}" alt="" width="35" height="35"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+   </main>
+   <footer class="d-flex flex-row">
+        <div class="ms-5 me-5"><span>0</span>/15</div>
+        <div class="ms-5 me-5">$ <span id="budget">100</span>m</div>
+        <div class="ms-5 me-5 bg-prim rounded p-1 text-white"><a href="" class="text-decoration-none text-reset">Auto-fill</a></div>
+        <div class="ms-5 me-5 p-1 bg-prim rounded"><img src="{{ url_for('static', filename='1x/reset.png') }}" alt="" width="20" height="20"></div>
+        <div class="ms-auto "><a href="" id="continueLink" class="text-decoration-none text-reset disabled nav-link">continue</a></div>
+   </footer>
+   <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+   <script>
+
+const baseUrl = "{{ url_for('static', filename='1x/') }}";
+const init_budget = 100;
+let budget = init_budget;
+let remaining_budget = document.querySelector("#budget");
+const positions = ['Defender', 'Midfielder', 'Attacker', 'Goalkeeper'];
+let counter = document.querySelector("footer").children[0].children[0];
+
+function attachListeners() {
+    let player = document.querySelectorAll(".players");
+    player.forEach(element => {
+        element.addEventListener('click', () => {
+            let teamName = element.children[1].innerHTML;
+            if (countPlayersFromTeam(teamName) >= 3) {
+                alert(`You cannot pick more than 3 players from the same team (${teamName}).`);
+                return;
+            }
+            let position = element.children[2].innerHTML;
+            let spaces = document.querySelector("#" + position).children;
+            for (let i = 0; i < spaces.length; i++) {
+                let space = spaces[i].children[1];
+                let price = element.children[3].children[0].innerHTML;
+                if (space.innerHTML == "name" && Number(price) <= budget) {
+                    space.innerHTML = element.children[0].innerHTML;
+                    space.dataset.teamname = teamName;  
+                    let img_container = spaces[i].children[0];
+                    img_container.classList.remove("p-5");
+                    img_container.classList.add("p-4");
+                    let img = spaces[i].children[0].children[0];
+                    img.src = `${baseUrl}${teamName}shirt.png`;
+                    img.width = 60;
+                    img.height = 70;
+                    budget = budget - Number(price);
+                    remaining_budget.innerHTML = String(budget.toPrecision(3));
+
+                    checkEmptySpaces();
+                    counter.innerHTML = String(Number(counter.innerHTML) + 1);
+                    element.style.pointerEvents = "none";
+                    break;
+                }
+            }
+        });
+    });
+}
+
+function countPlayersFromTeam(teamName) {
+    let count = 0;
+    positions.forEach(position => {
+        let positionElements = document.querySelectorAll(`#${position} .text-center`);
+        positionElements.forEach(element => {
+            if (element.dataset.teamname === teamName) {
+                count++;
+            }
+        });
+    });
+    return count;
+}
+
+function checkEmptySpaces() {
+    let emptySpaces = 0;
+    positions.forEach(position => {
+        let positionElements = document.querySelectorAll(`#${position} .text-center`);
+        positionElements.forEach(element => {
+            if (element.innerHTML === "name") {
+                emptySpaces++;
+            }
+        });
+    });
+
+    if (emptySpaces === 0) {
+        continued.classList.remove('disabled');
+        continued.classList.add('bg-prim');
+        continued.classList.add('text-white');
+        continued.style.pointerEvents = "";
+    } else {
+        continued.classList.add('disabled');
+        continued.style.pointerEvents = "none";
+    }
+}
+
+let continued = document.querySelector('#continueLink');
+
+continued.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    let players = [];
+    positions.forEach(position => {
+        let positionElements = document.querySelectorAll(`#${position} .text-center`);
+        positionElements.forEach(element => {
+            if (element.innerHTML !== "name") {
+                players.push({
+                    position: position,
+                    name: element.innerHTML
+                });
+            }
+        });
+    });
+
+    fetch('/checkpickedteam', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ players: players }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        window.location.href = "/fixtures";
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+positions.forEach(position => {
+    let positionElements = document.querySelectorAll(`#${position} .text-center`);
+    positionElements.forEach(element => {
+        element.parentNode.addEventListener('click', () => {
+            if (element.innerHTML !== "name") {
+                let img_container = element.previousElementSibling;
+                img_container.classList.remove("p-4");
+                img_container.classList.add("p-5");
+                let img = img_container.children[0];
+                img.src = "{{ url_for('static', filename='1x/add.png') }}";
+                img.width = 20;
+                img.height = 20;
+                let playerElement = Array.from(document.querySelectorAll("td")).find(td => td.innerHTML === element.innerHTML);
+                let price = parseFloat(playerElement.parentNode.children[3].children[0].innerHTML);
+                budget = budget + price;
+                remaining_budget.innerHTML = String(budget.toPrecision(3));
+                element.innerHTML = "name";
+                element.dataset.teamname = ""; 
+                checkEmptySpaces();
+                playerElement.parentNode.style.pointerEvents = "";
+                counter.innerHTML = String(Number(counter.innerHTML) - 1);
+            }
+        });
+    });
+});
+
+attachListeners();
+
+document.querySelectorAll("input, select").forEach(input => {
+    input.addEventListener("input", async function() {
+        let response = await fetch('/filter_pickteam?argument=' + input.value);
+        let filtered_players = await response.text();
+        document.querySelector("tbody").innerHTML = filtered_players;
+        attachListeners();
+    });
+});
+
+   </script>
+</body>
+</html>

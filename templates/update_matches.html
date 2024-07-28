@@ -1,0 +1,62 @@
+{% extends "admin.html" %}
+
+{% block form %}
+<form method="POST" action="{{ url_for('update_matches') }}">
+    <label for="home_team">Home Team:</label>
+    <select name="home_team" id="home">
+        {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="away_team">Away Team:</label>
+    <select name="away_team" id="away">
+        {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="home_score">Home Score:</label>
+    <input type="number" name="home_score" id="home_score" min="0" required>
+
+    <label for="away_score">Away Score:</label>
+    <input type="number" name="away_score" id="away_score" min="0" required>
+
+    <div id="stats">
+        {% for player in players %}
+        <div>
+            <h3>{{ player.name }} ({{ teamnames.get(player.SwepLeagueTeam_id) }})</h3>
+            {% if player.position == "Goalkeeper" %}
+                <label>Saves: <input type="number" name="saves[{{ player.id }}]" min="0"></label>
+            {% endif %}
+            <label>Goals: <input type="number" name="goals[{{ player.id }}]" min="0"></label>
+            <label>Assists: <input type="number" name="assists[{{ player.id }}]" min="0"></label>
+            <label>Yellow Card: <input type="checkbox" name="yellowcards" value="{{ player.id }}"></label>
+            <label>Red Card: <input type="checkbox" name="redcards" value="{{ player.id }}"></label>
+        </div>
+        {% endfor %}
+    </div>
+
+    <input type="submit" value="Update Match">
+</form>  
+<script>
+        let home = document.querySelector("#home")
+        let away = document.querySelector("#away")
+        console.log(home.value)
+        away.addEventListener("input", async function() {
+            if(home.value != "Home_Team"){
+                let response = await fetch('/adminfilter?home=' + home.value +'&away=' + away.value  );
+                let filteredform = await response.text();
+                document.querySelector("#stats").innerHTML = filteredform;
+            }
+        });
+        home.addEventListener("input", async function() {
+            if(away.value != "Away_Team"){
+                let response = await fetch('/adminfilter?home=' + home.value +'&away=' + away.value  );
+                let filteredform = await response.text();
+                document.querySelector("#stats").innerHTML = filteredform;
+            }
+        });
+
+    </script>
+{% endblock %}

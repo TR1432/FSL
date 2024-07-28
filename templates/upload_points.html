@@ -1,0 +1,15 @@
+{% extends "admin.html" %}
+
+{% block form %}
+    <form action="/upload_points" method="post">
+        {% for team in Swepteams %}
+            <h2>{{team.team_name}}</h2>
+            {% for player in players %}
+                {% if player.SwepLeagueTeam_id == team.id %}
+                <div><span>{{player.name}}</span> <input type="number" min="0" max="50" name="{{player.id}}" value="0" placeholder="Points"></div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        <input type="submit">
+    </form>
+{% endblock %}
