@@ -7,15 +7,15 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import datetime, date
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:#wJI*n$70V@localhost/swep_league_db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["JWT_SECRET_KEY"] = "secret-key"
 app.secret_key = "Nigga"
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 bcrypt = Bcrypt(app)
-jwt = JWTManager(app)
+
 
     
 # Defining models
@@ -1050,4 +1050,5 @@ def logout():
     return redirect("/")
 
 
-app.run(debug=True, host = ('0.0.0.0'))
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
