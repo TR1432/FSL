@@ -395,6 +395,11 @@ class UserChallengeSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = UserChallenge
         load_instance = True
+        include_fk = True
+        exclude = ("user", "predictions")
+
+    user = ma.Nested('UserSchema', only=('id', 'username'))
+    predictions = ma.Nested('UserPredictionSchema', many=True, exclude=('challenge',))
         
 class SwepLeagueTeamSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
