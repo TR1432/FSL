@@ -344,10 +344,16 @@ class TeamSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Team
         load_instance = True
-    include_relationships = True
+        include_relationships = True
+        include_fk = True 
+        exclude = ("user", "players", "captain")  
+
+    user = ma.Nested('UserSchema', exclude=('teams',))
+    players = ma.Nested('PlayerSchema', many=True, exclude=('teams',))
+    captain = ma.Nested('PlayerSchema', exclude=('teams',))
 
     current_points = ma.Integer(dump_only=True)
-    remaining_budget = ma.Integer(dump_only=True)
+    remaining_budget = ma.Integer(dump_only=True)eger(dump_only=True)
     captain = ma.Nested('PlayerSchema', only=['id', 'name'])
     players = ma.Nested('PlayerSchema', many=True, only=['id', 'name', 'position', 'price'])
 
