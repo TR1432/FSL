@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_current_user, get_jwt_identity
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import datetime, date
-import csv
+import csv, os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
@@ -1051,7 +1051,9 @@ def logout():
 
 
 def load_swep_teams(csv_file):
-    with open(csv_file, newline='') as file:
+    script_dir = os.path.dirname(__file__)
+    file_path = os.path.join(script_dir, csv_file)
+    with open(file_path, newline='') as file:
         reader = csv.reader(file)
         next(reader)
         for row in reader:
@@ -1062,7 +1064,9 @@ def load_swep_teams(csv_file):
         db.session.commit()
 
 def load_players(csv_file):
-    with open(csv_file, newline='') as file:
+    script_dir = os.path.dirname(__file__)
+    file_path = os.path.join(script_dir, csv_file)
+    with open(file_path, newline='') as file:
         reader = csv.reader(file)
         next(reader)
         for row in reader:
