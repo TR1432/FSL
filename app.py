@@ -374,6 +374,21 @@ class MatchSchema(FixtureSchema):
     class Meta:
         model = Match
         load_instance = True
+        include_fk = True
+        exclude = ("home_team", "away_team", "fixture", "saves", "goals", "assists", "yellow_cards", "red_cards")
+
+    home_team = ma.Nested('SwepLeagueTeamSchema', only=('id', 'team_name'))
+    away_team = ma.Nested('SwepLeagueTeamSchema', only=('id', 'team_name'))
+    fixture = ma.Nested('FixtureSchema', exclude=('matches',))
+
+    saves = ma.Method("get_saves")
+    goals = ma.Method("get_goals")
+    assists = ma.Method("get_assists")
+    yellow_cards = ma.Method("get_yellow_cards")
+    red_cards = ma.Method("get_red_cards")
+
+    def get_saves(self, obj):
+        return [{'player_id': save.id, 'count': count} for save, count in obj.get_player_stat('saves', obj.home_team_id) + obj.get_player_stat('saves', obj.away_team_id)]
 
 
 class UserChallengeSchema(ma.SQLAlchemyAutoSchema):
@@ -385,6 +400,13 @@ class SwepLeagueTeamSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = SwepLeagueTeam
         load_instance = True
+        include_fk = True
+        exclude = ("players", "home_fixtures", "away_fixtures", "home_matches", "away_matches")
+
+    players = ma.Nested('PlayerSchema', many=True, only=('id', 'name', 'position'))
+    home_fixtures = ma.Nested('FixtureSchema', many=True, exclude=('home_team',))
+    away_fixtures = ma.Nested('FixtureSchema', many=True, exclude=('away_team',))
+    
     matches_played = ma.Integer(dump_only=True)
     wins = ma.Integer(dump_only=True)
     draws = ma.Integer(dump_only=True)
