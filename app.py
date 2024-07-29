@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify, render_template, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_current_user, get_jwt_identity
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import datetime, date
 import csv, os
@@ -437,12 +436,6 @@ def register_user():
         team = Team(user_id=user.id, team_name=team_name)
         db.session.add(team)
         db.session.commit()
-
-        access_token = create_access_token(identity=username)
-
-        response = jsonify({'access_token': access_token})
-        response.status_code = 200
-        response.headers['Authorization'] = f'Bearer {access_token}'
 
         session['user_id'] = user.id
         
