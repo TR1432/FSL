@@ -448,12 +448,12 @@ def register_user():
         data = request.form.to_dict()
     
     if not data:
-        return render_template("error_signup.html", message ="Invalid JSON or form data"), 400
+        return render_template("sign_up.html", msg ="Invalid JSON or form data"), 400
 
     required_fields = ["username", "email", "password", "team_name", "favteam"]
     for field in required_fields:
         if not data.get(field):
-            return render_template("error_signup.html", message ="{field} is required"), 400
+            return render_template("sign_up.html", msg ="{field} is required"), 400
 
     username = data.get("username")
     email = data.get("email")
@@ -464,7 +464,7 @@ def register_user():
     
     existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
     if existing_user:
-        return render_template("error_signup.html", message ="Username or email already exists"), 400
+        return render_template("sign_up.html", msg ="Username or email already exists"), 400
 
     try:
         user = User(username=username, email=email, favteam=favteam)
@@ -482,7 +482,7 @@ def register_user():
     except Exception as e:
         db.session.rollback()
         app.logger.error(f"Error creating user: {e}")
-        return render_template("error_signup.html", message ="Error creating user"), 500
+        return render_template("sign_up.html", msg ="Error creating user"), 500
 
 
 @app.route("/login", methods=["POST"])
@@ -494,22 +494,22 @@ def login_user():
         data = request.form.to_dict()  
         
     if not data:     
-        return render_template("error_signin.html", message="Invalid request"), 400
+        return render_template("sign_in.html", msg="Invalid request"), 400
     
-    username = data.get("username")
+    email= data.get("email")
     password = data.get("password")
     
-    if not username or not password:
-        return render_template("error_signin.html", message="Invalid request"), 400
+    if not email or not password:
+        return render_template("sign_in.html", msg="Invalid request"), 400
     
     try:
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(email = email).first()
         if not user or not user.check_password(password):
-            return render_template("error_signin.html", message="Invalid credentials"), 401
+            return render_template("sign_in.html", msg="Invalid credentials"), 401
         
         team = Team.query.filter_by(user_id=user.id).first()
         if not team:
-            return render_template("error_signin.html", message="Team not found"), 404
+            return render_template("sign_in.html", msg="Team not found"), 404
 
         session['user_id'] = user.id
 
@@ -518,7 +518,7 @@ def login_user():
         else:
             return redirect("/fixtures")
     except Exception as e:
-        return render_template("error_signin.html", message=f"{e}"), 500
+        return render_template("sign_in.html", msg=f"{e}"), 500
     
 @app.route("/pickteam" , methods=["GET"])
 def pickplayers():
@@ -789,13 +789,7 @@ def challenge():
 
 @app.route("/enterchallenge", methods=["Get", "Post"])
 def enter_challenge():
-    current_user = session.get("user_id")
-    user = User.query.filter_by(id=current_user).first()
-    gameweek = GameWeek.get_current_week()
-    challenge = UserChallenge(user_id=user.id, challenge_gameweek=gameweek)
-    db.session.add(challenge)
-    db.session.commit()
-    return redirect("/predict")
+    return render_template("Manual_Challenge.html")
 
 @app.route("/predict", methods = ["Get", "Post"])
 def enter_predictions():
@@ -1075,7 +1069,21 @@ def new_gameweek():
             return render_template("admin.html", msg="Action cancelled"), 200
     else:
         return render_template("set_new_gameweek.html"), 200
-        
+
+@app.route("/enterchallenge_manualy", methods=["Get","Post"])
+def ente_user_challenge():
+    email = request.args.get("email")
+    if not email :
+        return "no Email"
+    user = User.query.filter_by(email = email).first()
+    if not user:
+        return "User doesn't Exsist"
+    gameweek = GameWeek.get_current_week()
+    challenge = UserChallenge(user_id=user.id, challenge_gameweek=gameweek)
+    db.session.add(challenge)
+    db.session.commit()
+    return "Challenge Added"
+
 @app.route("/logout")
 def logout():
     session.pop("user_id", None)
