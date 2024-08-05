@@ -97,7 +97,7 @@ class Team(db.Model):
     
     @property
     def remaining_budget(self):
-        return 100 - sum(player.price for player in self.players)
+        return 80 - sum(player.price for player in self.players)
     
     def set_captain(self, player_id):
         if player_id in [player.id for player in self.players]:
@@ -566,7 +566,7 @@ def check_and_submit_teams():
             total_price += playerdb.price
 
 
-        if total_price > 100:
+        if total_price > 80:
             return jsonify({'error': f"Total price exceeds budget (100): {total_price}"}), 400
         
         team = Team.query.filter_by(user_id=user.id).first()
