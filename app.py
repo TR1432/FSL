@@ -1084,10 +1084,63 @@ def ente_user_challenge():
     db.session.commit()
     return "Challenge Added"
 
+@app.route("/reset_page", methods=["GET", "POST"])
+def resetpassword():
+    if request.method == "POST":
+        data = request.form.to_dict()
+        password = data.get('password')
+        email = data.get('email')
+        if not email or not password:
+            return render_template("resetpage.html", msg='Enter email and password')
+        user = User.query.filter_by( email = email).first()
+        if not user :
+            return render_template("resetpage.html", msg="User email does not exsist")
+        user.set_password(password)
+        db.session.commit()
+        return render_template("sign_in.html", msg = "Password Updated")
+    else:
+        return render_template("resetpage.html")
+
 @app.route("/logout")
 def logout():
     session.pop("user_id", None)
     return redirect("/")
 
+def load_swep_teams(csv_file):
+    script_dir = os.path.dirname(__file__)
+    file_path = os.path.join(script_dir, csv_file)
+    with open(file_path, newline='') as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            team = SwepLeagueTeam(
+                team_name=row[0]
+            )
+            db.session.add(team)
+        db.session.commit()
+
+def load_players(csv_file):
+    script_dir = os.path.dirname(__file__)
+    file_path = os.path.join(script_dir, csv_file)
+    with open(file_path, newline='') as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            team = SwepLeagueTeam.query.filter_by(team_name=row[2]).first()
+            if team:
+                player = Player(
+                    name=row[0],
+                    position=row[1],
+                    price=row[3],
+                    SwepLeagueTeam_id=team.id
+                )
+                db.session.add(player)
+        db.session.commit()   
+        
+with app.app_context():
+    db.drop_all()
+    db.create_all()
+    load_swep_teams('Swepleageteams.csv')
+    load_players('players.csv')
 
 app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)))
