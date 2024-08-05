@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleapp.css') }}">
+</head>
+<body class=" vh-100 w-100 d-flex align-items-center justify-content-center" >
+    <div class="w-50 p-5 shadow-lg opacity-100 h-60 bg-white">
+        <form action="/reset_page" method="post" class="d-flex flex-column align-items-center">
+            <input class="w-75" type="email" name="email" placeholder="Enter email">
+            <input class="w-75" type="password" id="pass" name="password" placeholder="Enter New Password">
+            <span><input placeholder="showpass" type="checkbox" onclick="toggle_pass('pass')">Show Password</span>
+            <input class="w-75" type="submit" placeholder="Set New Password" value="Set New Password">
+        </form>
+    </div>
+<script src="{{ url_for('static', filename='js/sign.js') }}"></script>
+<script>
+    {% if msg %}
+    alert('{{msg}}');
+    {% endif %}
+</script>
+</body>
+</html>

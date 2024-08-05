@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/sign.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styleapp.css') }}">
 </head>
-<body class=" vh-100 w-100">
-    <main class="d-flex w-100 bg-filter rounded flex-column justify-content-center align-items-center vh-100">
-        <div class="w-50 p-5 shadow-lg flex-wrap opacity-100 h-60 bg-white">
+<body class="w-100 vh-100">
+    <main class="d-flex container-fluid bg-filter rounded flex-column justify-content-center align-items-center vh-100">
+        <div class="container-fluid p-5 shadow-lg opacity-100 h-60 bg-white">
             {% block form %}
             {% endblock %}
         </div>

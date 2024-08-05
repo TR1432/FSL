@@ -37,9 +37,8 @@
 
     {% block user %}
     <script src="https://js.paystack.co/v2/inline.js"></script>
-   <!-- <script src="https://newwebpay.qa.interswitchng.com/inline-checkout.js"></script> -->
    <script>
-    const payment = document.getElementById('pay');
+    /*const payment = document.getElementById('pay');
     payment.addEventListener("click", payWithPaystack, false);
 
     function payWithPaystack(e) {
@@ -47,7 +46,7 @@
 
         let handler = PaystackPop.setup({
             key: 'pk_test_9bdac3f85529d1044143efabbfb07d09641d5fd6',
-            email: {{user.email}},
+            email: "{{user.email}}",
             amount: 100000,
             currency: 'NGN',
             ref: '' + Math.floor((Math.random() * 1000000000) + 1),
@@ -61,28 +60,11 @@
             }
         });
         handler.openIframe();
-    }
-       /* const payment = document.getElementById('pay');
-        payment.addEventListener("click", payWithInterswitch);
-        function payWithInterswitch(e){
-            e.preventDefault();
-            
-            let handler = {
-                merchant_code: "MX143633",          
-                pay_item_id: "101007",
-                txn_ref:''+Math.floor((Math.random() * 1000000000) + 1),
-                site_redirect_url: "/enterchallenge",
-                amount: 100000, 
-                currency: 566,
-                onComplete: paymentCallback,
-                mode: 'TEST'
-            };
-            window.webpayCheckout(handler);
-        }
-        function paymentCallback(response) {
-            console.log(response);
-            window.location.href = "/enterchallenge";
-        }*/
+    }*/
+    const payment = document.getElementById('pay');
+    payment.addEventListener("click", function (){
+        window.location.href = "/enterchallenge";
+    });
         </script>
         {% if msg %}
             <script>

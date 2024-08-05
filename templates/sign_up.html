@@ -39,4 +39,9 @@
             <input class="bg-main border border-0 rounded m-3" type="submit" placeholder="REGISTER" value="REGISTER" id="register" class="submit">
         </div>
     </form>
+    <script>
+        {% if msg %}
+        alert('{{msg}}');
+        {% endif %}
+    </script>
 {% endblock %}
