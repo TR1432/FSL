@@ -592,6 +592,10 @@ def fixtures_and_matches():
     fixtures = Fixture.query.all()
     fixture_schema = FixtureSchema(many=True)
     fixtures_data = fixture_schema.dump(fixtures)
+
+    team = Team.query.filter_by(user_id=user.id).first()
+
+    captain = team.captain
     
     matches = Match.query.all()    
     matches.reverse()
@@ -599,7 +603,7 @@ def fixtures_and_matches():
     teamdict = {team.id : team.team_name for team in swepteam}
     gameweek = GameWeek.get_current_week()
 
-    return render_template("Fixtures.html", fixtures=fixtures_data, matches=matches, matchday=gameweek, user=user, teamnames = teamdict)
+    return render_template("Fixtures.html", fixtures=fixtures_data, matches=matches, matchday=gameweek, user=user, teamnames = teamdict, team = team, captain = captain )
 
 @app.route("/match_details", methods=["Get", "Post"])
 def show_stats():
