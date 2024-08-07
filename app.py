@@ -71,7 +71,7 @@ class Team(db.Model):
     team_name = db.Column(db.String(50), nullable=False)
     total_points = db.Column(db.Integer, default=0)
     players = db.relationship('Player', secondary=player_teams, backref=db.backref('teams', lazy=True))
-    budget = db.Column(db.Integer, default=100)
+    budget = db.Column(db.Integer, default=85)
     captain_id = db.Column(db.Integer, db.ForeignKey('player.id'), nullable=True)
     captain = db.relationship('Player', foreign_keys=[captain_id])
     
@@ -97,7 +97,7 @@ class Team(db.Model):
     
     @property
     def remaining_budget(self):
-        return 80 - sum(player.price for player in self.players)
+        return 85 - sum(player.price for player in self.players)
     
     def set_captain(self, player_id):
         if player_id in [player.id for player in self.players]:
@@ -566,7 +566,7 @@ def check_and_submit_teams():
             total_price += playerdb.price
 
 
-        if total_price > 80:
+        if total_price > 85:
             return jsonify({'error': f"Total price exceeds budget (100): {total_price}"}), 400
         
         team = Team.query.filter_by(user_id=user.id).first()
