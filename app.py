@@ -256,7 +256,9 @@ class SwepLeagueTeam(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     team_name = db.Column(db.String(20), nullable=False)
     players = db.relationship('Player', backref='swep_league_team', lazy='dynamic')    
-        
+    home_matches = db.relationship('Match', foreign_keys='Match.home_team_id', backref='home_team')
+    away_matches = db.relationship('Match', foreign_keys='Match.away_team_id', backref='away_team')
+    
     @hybrid_property
     def matches_played(self):
         return self.home_matches.count() + self.away_matches.count()
