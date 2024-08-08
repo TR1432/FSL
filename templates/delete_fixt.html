@@ -1,0 +1,30 @@
+{% extends "admin.html" %}
+
+{% block form %}
+    <form action="/delete_fixt" method="post">
+        <select required title="home_team"  name="home_team">
+            <option selected disabled>Home Team</option>
+            {% for team in teams%}
+            <option value="{{team}}">{{team}}</option>
+            {% endfor %}
+        </select>
+        <select title="away_team"  name="away_team">
+            <option selected disabled>Away Team</option>
+            {% for team in teams%}
+            <option value="{{team}}">{{team}}</option>
+            {% endfor %}
+        </select>
+        <select title="Gameweek"  name="gameweek">
+            <option selected disabled>Gameweek</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        <input placeholder="date" name="date" value="date" type="date">
+        <input type="submit" name="submit">
+    </form>
+{% endblock %}
