@@ -408,7 +408,7 @@ class SwepLeagueTeamSchema(ma.SQLAlchemyAutoSchema):
         model = SwepLeagueTeam
         load_instance = True
         include_fk = True
-        exclude = ("players", "home_fixtures", "away_fixtures", "home_matches", "away_matches")
+        exclude = ("players", "home_fixtures", "away_fixtures")
 
     players = ma.Nested('PlayerSchema', many=True, only=('id', 'name', 'position'))
     home_fixtures = ma.Nested('FixtureSchema', many=True, exclude=('home_team',))
