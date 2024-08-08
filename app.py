@@ -905,7 +905,7 @@ def delete_fixt():
     else:
         swepteam = SwepLeagueTeam.query.all()
         teamlist = [team.team_name for team in swepteam]
-        return render_template("create_fixture.html", teams=teamlist)
+        return render_template("delete_fixt.html", teams=teamlist)
     
 @app.route("/update_match", methods=["GET", "POST"])
 def update_matches():
