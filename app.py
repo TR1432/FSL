@@ -899,6 +899,8 @@ def delete_fixt():
         ).first()
         
         if existing_fixture:
+            db.session.delete(existing_fixture)
+            db.session.commit() 
             return render_template("admin.html", msg="Fixture Deleted")
 
         return render_template("admin.html", msg="Fixture not Found")
