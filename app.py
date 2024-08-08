@@ -878,6 +878,34 @@ def create_fixt():
         swepteam = SwepLeagueTeam.query.all()
         teamlist = [team.team_name for team in swepteam]
         return render_template("create_fixture.html", teams=teamlist)
+
+@app.route("/delete_fixt", methods=["Get", "Post"])
+def delete_fixt():
+    if request.method == "POST":
+        data = request.form.to_dict()
+        game_week = int(data.get("gameweek"))
+        home_team_name = data.get("home_team")
+        away_team_name = data.get("away_team")
+        kickoff_time_str = data.get("date")
+        kickoff_time = datetime.strptime(kickoff_time_str, '%Y-%m-%d').date()
+        
+        home_team = SwepLeagueTeam.query.filter_by(team_name=home_team_name).first()
+        away_team = SwepLeagueTeam.query.filter_by(team_name=away_team_name).first()
+        
+        existing_fixture = Fixture.query.filter_by(
+            home_team=home_team,
+            away_team=away_team,
+            kickoff_time=kickoff_time
+        ).first()
+        
+        if existing_fixture:
+            return render_template("admin.html", msg="Fixture Deleted")
+
+        return render_template("admin.html", msg="Fixture not Found")
+    else:
+        swepteam = SwepLeagueTeam.query.all()
+        teamlist = [team.team_name for team in swepteam]
+        return render_template("create_fixture.html", teams=teamlist)
     
 @app.route("/update_match", methods=["GET", "POST"])
 def update_matches():
