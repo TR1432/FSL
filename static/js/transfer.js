@@ -83,25 +83,29 @@ $(document).ready(function() {
 
     $('#submit').click(function() {
         const teamPlayers = [];
-
+    
         $('.player').each(function() {
             teamPlayers.push($(this).data('id'));
         });
-
+    
         $.ajax({
             url: '/maketransfer',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ players: teamPlayers }),
             success: function(response) {
-                alert('Transfers successful');
+                alert(response.message);
                 window.location.href = "/transfers";
             },
-            error: function(response) {
-                alert('Error making transfers, please refresh the page');
+            error: function(xhr) {
+                let errorMessage = 'Error making transfers, please refresh the page';
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMessage = xhr.responseJSON.error;
+                }
+                alert(errorMessage);
             }
         });
-    });
+    }); 
 
     function attachInputListeners() {
         $("input, select").off('input').on("input", async function() {
