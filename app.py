@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from sqlalchemy.ext.hybrid import hybrid_property
-from datetime import datetime, date
+from datetime import datetime, date, time
 import csv, os
 
 app = Flask(__name__)
@@ -424,6 +424,15 @@ class SwepLeagueTeamSchema(ma.SQLAlchemyAutoSchema):
     total_points = ma.Integer(dump_only=True)
 
 
+def is_allowed_time():
+    now = datetime.now()
+    day_of_week = now.weekday()
+    current_time = now.time()
+    if (day_of_week == 5 and current_time >= time(6, 0)) or \
+           (day_of_week == 6 and current_time < time(19, 0)):
+        return False
+    return True
+
 
 # Defining API endpoints
 
@@ -664,6 +673,8 @@ def make_transfer():
     current_user = session.get("user_id")
     user = User.query.filter_by(id=current_user).first()
     team = Team.query.filter_by(user_id=user.id).first()
+    if not is_allowed_time():
+        return jsonify({"error": "Transfers are not allowed between Saturday 6 AM and Sunday 7 PM."}), 403
     if not user:
         return redirect("/")
     if not team:
@@ -691,7 +702,7 @@ def make_transfer():
 
     team.players = new_players
     db.session.commit()
-    return redirect("/transfers"), 200
+    return jsonify({"message": "Transfers successful"}), 200
 
 @app.route("/points", methods=["GET"])
 def display_points():
