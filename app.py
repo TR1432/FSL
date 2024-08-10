@@ -1136,7 +1136,28 @@ def resetpassword():
         return render_template("sign_in.html", msg = "Password Updated")
     else:
         return render_template("resetpage.html")
-
+        
+@app.route("/enter_player", methods=["GET"])
+def addplayer():
+    name = request.args.get("name")
+    swepteam = request.args.get("team")
+    position = request.args.get("position")
+    price = request.args.get("price")
+    if not name or not swepteam:
+        return "Invalid Request"
+    Team = SwepLeagueTeam.query.filter_by(team_name = swepteam).first()
+    if not Team:
+        return "Team doesn't Exsist"
+    player = Player(
+                    name=name,
+                    position=position,
+                    price=price,
+                    SwepLeagueTeam_id=Team.id
+                )
+    db.session.add(player)
+    db.session.commit()
+    return f"{player.name} Added to {Team.team_name} Succesfully"
+    
 @app.route("/logout")
 def logout():
     session.pop("user_id", None)
