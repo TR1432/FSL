@@ -4,14 +4,21 @@
     {% block info %}
     <div class="info h-100 w-15 text-center bg-l overflow-auto" >
         <header>Upcoming</header>
-        {% for fixture in fixtures %}
-        <div class="d-flex flex-column h-auto"> 
-                {% if fixture.game_week < matchday %}
-                {% else %}
-                    <div class="rounded bg-sec mb-2 ps-3 pe-3 pt-2 pb-2"><span>{{fixture.home_team.team_name}}</span> VS <span>{{fixture.away_team.team_name}}</span></div>
-                {% endif %}
+{% set last_game_week = None %}
+{% for fixture in fixtures %}
+    {% if fixture.game_week >= matchday %}
+        <div class="d-flex flex-column h-auto">
+            {% if fixture.game_week != last_game_week %}
+                <div class="fs-4 text-center">Game week {{ fixture.game_week }}</div>
+                {% set last_game_week = fixture.game_week %}
+            {% endif %}
+            <div class="rounded bg-sec mb-2 ps-3 pe-3 pt-2 pb-2">
+                <span>{{ fixture.home_team.team_name }}</span> VS 
+                <span>{{ fixture.away_team.team_name }}</span>
             </div>
-            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
     </div>
     {% endblock %}
 
