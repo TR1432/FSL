@@ -8,7 +8,7 @@
 {% for fixture in fixtures %}
     {% if fixture.game_week >= matchday %}
         {% set fixture_counter = fixture_counter + 1 %}
-        {% if fixture_counter === 1 %}
+        {% if fixture_counter == 1 %}
             <div class="fs-3 text-center mt-4">Game week {{ fixture.game_week }}</div>
         {% endif %}
         <div class="d-flex flex-column h-auto">
@@ -17,7 +17,7 @@
                 <span>{{ fixture.away_team.team_name }}</span>
             </div>
         </div>
-        {% if fixture_counter === 4 %}
+        {% if fixture_counter == 4 %}
             {% set fixture_counter = 0 %}
         {% endif %}
     {% endif %}
