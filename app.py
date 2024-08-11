@@ -640,7 +640,7 @@ def show_stats():
 def show_all_stats():
     swepteams = SwepLeagueTeam.query.all()
     swepteams.sort(key=lambda team: team.total_points, reverse=True)
-    fslteams = Team.query.all()
+    fslteams = Team.query.order_by(Team.total_points.desc()).all()
     teams_data_unsorted = [
         {
             "team_name": team.team_name,
@@ -648,7 +648,6 @@ def show_all_stats():
             "current_points": team.current_points
         } for team in fslteams
     ]
-    teams_data = sorted(teams_data_unsorted, key=lambda x: x["total_points"], reverse=True)
     return render_template("Tables.html", swepteams = swepteams, fslteams = teams_data)
 
 @app.route("/transfers", methods=["GET"])
