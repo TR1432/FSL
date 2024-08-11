@@ -737,6 +737,8 @@ def manage_team():
 def change_captain():
     current_user = session.get("user_id")
     user = User.query.filter_by(id=current_user).first()
+    if not is_allowed_time():
+        return jsonify({"error": "Transfers are not allowed between Saturday 6 AM and Sunday 7 PM."}), 403
     if not user:
         return jsonify({"error": "No user found"}), 400
     team = Team.query.filter_by(user_id=user.id).first()
