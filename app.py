@@ -641,7 +641,7 @@ def show_all_stats():
     swepteams = SwepLeagueTeam.query.all()
     swepteams.sort(key=lambda team: team.total_points, reverse=True)
     fslteams = Team.query.order_by(Team.total_points.desc()).all()
-    teams_data_unsorted = [
+    teams_data = [
         {
             "team_name": team.team_name,
             "total_points": team.total_points,
