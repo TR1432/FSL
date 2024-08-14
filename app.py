@@ -1174,6 +1174,17 @@ def addplayer():
 def logout():
     session.pop("user_id", None)
     return redirect("/")
-
+    
+@app.route("/reset_points", methods=["Get"])
+def reset_points():
+    password = request.args.get("pass")
+    if password and password == "yes":
+        teams = Team.query.all()
+        for team in teams:
+            team.total_points = 0
+        db.session.commit()
+        return "Points Removed"
+    else:
+        return redirect("/")
 
 app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)))
